@@ -33,7 +33,7 @@ public class UserController {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), false,null));
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<ApiResponse> getAllUsers(){
         try {
@@ -82,7 +82,7 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{userId}/delete")
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable Long userId){
         try {
@@ -94,7 +94,7 @@ public class UserController {
     }
 
     @PostMapping("/assign-role")
-//    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ApiResponse> updateUserRole(@RequestBody UserRoleRequest request) {
         try {
             User updatedUser = userService.updateUserRole(request.getUserId(), request.getRoleName());
